@@ -112,7 +112,8 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def generate_ssl_context
-    ctx = OpenSSL::SSL::SSLContext.new(:SSLv3)
+    ctx = OpenSSL::SSL::SSLContext.new
+    ctx.min_version = OpenSSL::SSL::SSL3_VERSION
     @@cached_rsa_key ||= OpenSSL::PKey::RSA.new(1024){ }
 
     ctx.key = @@cached_rsa_key
